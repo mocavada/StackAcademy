@@ -16,6 +16,12 @@ public class EmployeeTests {
     @Autowired
     private EmployeeAdminUserRepo employeeAdminUserRepo;
 
+    @Autowired
+    private EmployeeService employeeService;
+
+
+
+
     /**
      * Test JpaRepository Methods.
      * By: Marc Cavada
@@ -42,4 +48,5 @@ public class EmployeeTests {
 //        employeeAdminUserRepo.findAllByOrOrderByUserNameAsc().forEach(System.out::println);
 
     }
+
 }

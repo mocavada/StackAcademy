@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Component
 @Scope(value = WebApplicationContext.SCOPE_SESSION,
         proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class EmployeeAdminLoginStatus implements Serializable {
+public class EmployeeLoginStatus implements Serializable {
 
     private static final long serialVersionUID = -1L;
 

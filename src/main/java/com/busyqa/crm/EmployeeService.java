@@ -1,6 +1,6 @@
 package com.busyqa.crm;
 
-import com.busyqa.crm.pojo.employee.EmployeeAdminLoginStatus;
+import com.busyqa.crm.pojo.employee.EmployeeLoginStatus;
 import com.busyqa.crm.pojo.employee.EmployeeAdminUser;
 import com.busyqa.crm.pojo.employee.EmployeeRole;
 import com.busyqa.crm.repo.EmployeeAdminUserRepo;
@@ -9,7 +9,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import javax.xml.bind.SchemaOutputResolver;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,16 +77,15 @@ public class EmployeeService {
      * @return
      * by Marc Cavada
      */
-    public EmployeeAdminLoginStatus login(EmployeeAdminUser employeeAdminUser, HttpSession session) {
+    public EmployeeLoginStatus login(EmployeeAdminUser employeeAdminUser, HttpSession session) {
 
-         EmployeeAdminLoginStatus employeeAdminLoginStatus = new EmployeeAdminLoginStatus();
+         EmployeeLoginStatus employeeLoginStatus = new EmployeeLoginStatus();
 
-         if(EmployeeRole.SYSTEM_ADMIN.equals(employeeAdminUser.getRole()) &&
-                 session.getAttribute("id") != null &&
-         session.getAttribute("login") != null &&
-                 (boolean) session.getAttribute("login")) {
-             employeeAdminLoginStatus.setLogin(true);
-             System.out.println("LOGIN AS SYSTEM ADMIN ALREADY");
+         if(session.getAttribute("id") != null &&
+            session.getAttribute("login") != null && (boolean) session.getAttribute("login")) {
+
+             employeeLoginStatus.setLogin(true);
+             System.out.println("LOGIN ALREADY");
 
 
          } else {
@@ -95,20 +93,19 @@ public class EmployeeService {
 
              if(employeeAdminUserRepo.findFirst1ByUserNameAndPasswordAndRole
                      (employeeAdminUser.getUserName(), employeeAdminUser.getPassword(), employeeAdminUser.getRole()) != null) {
-
                      session.setAttribute("id", session.getId());
                      session.setAttribute("login", true);
-                     employeeAdminLoginStatus.setLogin(true);
+                     employeeLoginStatus.setLogin(true);
                      System.out.println(" LOGIN");
 
              } else {
                  session.setAttribute("login", false);
-                 employeeAdminLoginStatus.setLogin(false);
+                 employeeLoginStatus.setLogin(false);
                  System.out.println(" LOGIN FAIL: Username & Password Not Match");
              }
          }
 
-        return employeeAdminLoginStatus;
+        return employeeLoginStatus;
 
     }
 
@@ -118,15 +115,15 @@ public class EmployeeService {
      * @return
      * by Marc Cavada
      */
-    public EmployeeAdminLoginStatus checkLoginSessionStatus(HttpSession session) {
-        EmployeeAdminLoginStatus employeeAdminLoginStatus = new EmployeeAdminLoginStatus();
+    public EmployeeLoginStatus checkLoginSessionStatus(HttpSession session) {
+        EmployeeLoginStatus employeeLoginStatus = new EmployeeLoginStatus();
 
         if (session.getAttribute("id") != null && session.getAttribute("login") != null && (boolean) session.getAttribute("login")) {
-            employeeAdminLoginStatus.setLogin(true);
+            employeeLoginStatus.setLogin(true);
         } else {
-            employeeAdminLoginStatus.setLogin(false);
+            employeeLoginStatus.setLogin(false);
         }
-        return employeeAdminLoginStatus;
+        return employeeLoginStatus;
 
     }
 }

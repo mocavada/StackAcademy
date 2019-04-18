@@ -20,6 +20,11 @@ public class EmployeeAdminUser {
     public EmployeeAdminUser() {
     }
 
+    public EmployeeAdminUser(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+
     public EmployeeAdminUser(String userName, String password, EmployeeRole role) {
         this.userName = userName;
         this.password = password;

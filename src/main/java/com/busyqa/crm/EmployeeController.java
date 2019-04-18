@@ -1,7 +1,7 @@
 package com.busyqa.crm;
 
 
-import com.busyqa.crm.pojo.employee.EmployeeAdminLoginStatus;
+import com.busyqa.crm.pojo.employee.EmployeeLoginStatus;
 import com.busyqa.crm.pojo.employee.EmployeeAdminUser;
 import com.busyqa.crm.pojo.employee.EmployeeRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +52,7 @@ public class EmployeeController {
     @RequestMapping(method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE, value = "/admin/login")
-    public EmployeeAdminLoginStatus login(@RequestBody EmployeeAdminUser employeeAdminUser, HttpSession session) {
+    public EmployeeLoginStatus login(@RequestBody EmployeeAdminUser employeeAdminUser, HttpSession session) {
 
         System.out.println(session.getId()
                 + ":" + employeeAdminUser.getUserName() + " :"
@@ -71,7 +71,7 @@ public class EmployeeController {
      * by Marc Cavada
      */
     @RequestMapping(method = RequestMethod.GET, value = "/admin/checklogin")
-    public EmployeeAdminLoginStatus checkLogin(HttpSession session) {
+    public EmployeeLoginStatus checkLogin(HttpSession session) {
         return this.employeeService.checkLoginSessionStatus(session);
     }
 

@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class CRMController {
     @RequestMapping(method = RequestMethod.POST, value="/registerstudent",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public StudentRecords registerStudentRecord(@RequestBody StudentRecords studentRecords) throws Exception {
 
@@ -38,7 +40,7 @@ public class CRMController {
 
     //read
     @RequestMapping(method = RequestMethod.GET, value="/students")
-
+    @PreAuthorize("hasRole('ROLE_USER')")
     @ResponseStatus(HttpStatus.OK)
     public List<StudentRecords> ListofRegisteredStudents(){
 
