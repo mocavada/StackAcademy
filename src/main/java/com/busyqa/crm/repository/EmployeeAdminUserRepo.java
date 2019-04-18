@@ -1,4 +1,4 @@
-package com.busyqa.crm.repo;
+package com.busyqa.crm.repository;
 
 import com.busyqa.crm.pojo.employee.EmployeeAdminUser;
 import com.busyqa.crm.pojo.employee.EmployeeRole;
@@ -12,17 +12,10 @@ public interface EmployeeAdminUserRepo extends JpaRepository<EmployeeAdminUser, 
     EmployeeAdminUser findFirst1ByUserNameAndPasswordAndRole(String userName, String password, EmployeeRole role);
     List<EmployeeAdminUser> findByRole(EmployeeRole role);
 
-
-
 //  BELOW METHODS ARE ONLY USED IN TEST  /
 
     EmployeeAdminUser findFirstByRole(EmployeeRole role);
     EmployeeAdminUser findFirst1ByRole(EmployeeRole role);
-
-
-
-
-
 
 
 }

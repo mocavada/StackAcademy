@@ -1,5 +1,7 @@
 package com.busyqa.crm.pojo.employee;
 
+import com.busyqa.crm.auth.User;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -9,6 +11,7 @@ public class EmployeeProfile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+
 	private String userName;
 	private String password;
 	private String email;
@@ -26,8 +29,7 @@ public class EmployeeProfile {
 	private String sessionID;
 
 
-	public EmployeeProfile() {
-	}
+
 
 
 }

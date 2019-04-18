@@ -24,11 +24,13 @@ public class CRMController {
     private CRMService crmService;
 
 
+
 //===================== code added by Ajaypal Singh===============
     //create
     @RequestMapping(method = RequestMethod.POST, value="/registerstudent",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public StudentRecords registerStudentRecord(@RequestBody StudentRecords studentRecords) throws Exception {
 
@@ -36,28 +38,15 @@ public class CRMController {
         return studentRecords;
     }
 
-    //AUDIT PAGE
-    @RequestMapping(method = RequestMethod.GET, value="/audit")
-    @PreAuthorize("hasRole('ROLE_AUDIT') OR ('ROLE_SYSTEM_ADMIN')")
+    //read
+    @RequestMapping(method = RequestMethod.GET, value="/students")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @ResponseStatus(HttpStatus.OK)
-    public List<StudentRecords> getAuditPage(){
+    public List<StudentRecords> ListofRegisteredStudents(){
 
         return this.crmService.listofRegisteredStudentRecords();
 
     }
-
-    //ADMIN PAGE
-    @RequestMapping(method = RequestMethod.GET, value="/systemadmin")
-    @PreAuthorize("hasRole('ROLE_SYSTEM_ADMIN')")
-    @ResponseStatus(HttpStatus.OK)
-    public List<StudentRecords> getSystemAdminPage(){
-
-        return this.crmService.listofRegisteredStudentRecords();
-
-    }
-
-
-
 
     //read
     @RequestMapping(method=RequestMethod.GET, value = "/student/id/{id}")
@@ -223,8 +212,12 @@ public class CRMController {
     public List<StudentRecords> SearchStudentRecordbyCourseType(@RequestParam(value="courseType") String courseType,
                                                                 @RequestParam(value="course") String course){
 
+
+
             List<StudentRecords> csv = this.crmService.SearchStudentRecordsbyCourseTypeOrCourse(courseType, course);
             return csv;
+
+
     }
 
 

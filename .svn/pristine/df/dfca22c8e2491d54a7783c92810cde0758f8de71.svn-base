@@ -1,6 +1,6 @@
 package com.busyqa.crm.config;
 
-import com.busyqa.crm.service.AdminDetailService;
+import com.busyqa.crm.auth.AdminUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,12 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    AdminDetailService adminUserDetailService;
-
-//    @Bean
-//    public JwtAuthTokenFilter authenticationJwtTokenFilter() {
-//        return new JwtAuthTokenFilter();
-//    }
+    AdminUserDetailService adminUserDetailService;
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider(){
@@ -36,9 +31,6 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         return provider;
     }
 
-    /**
-     * @return authorityMapper - Takes value from database > Prepend "ROLE_" > Convert to uppercase
-     */
     @Bean
     public GrantedAuthoritiesMapper authoritiesMapper() {
         SimpleAuthorityMapper authorityMapper = new SimpleAuthorityMapper();

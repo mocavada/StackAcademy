@@ -1,6 +1,5 @@
 ## DEV SETTINGS
 spring.devtools.livereload.enabled=true
-spring.main.allow-bean-definition-overriding=true
 
 ## DEPENDENCY SETTINGS
 spring.thymeleaf.cache=false
